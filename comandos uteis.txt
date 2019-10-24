@@ -1,0 +1,14 @@
+Para matar as tasks no windows quando da erro de serviço lendo a mesma porta
+taskkill /F /IM node.exe
+
+Criar migration
+yarn sequelize migration:create --name=create-files
+
+Criar mongodb no docker
+docker run --name mongobarber -p 27017:27017 -d -t mongo
+
+Criar o Redis no docker
+docker run --name redisbarber -p 6379:6379 -d -t redis:alpine
+
+Executar migrations
+yarn sequelize db:migrate
