@@ -12,7 +12,7 @@ class CheckinController {
     /**
      * Check if the student exists
      */
-    const { student_id } = req.body;
+    const { student_id } = req.params;
     const student = await Student.findByPk(student_id);
     if (!student) {
       return res.status(401).json({ error: 'Student not found' });
@@ -61,7 +61,18 @@ class CheckinController {
   }
 
   async index(req, res) {
-    return res.json();
+    /**
+     * Check if the student exists
+     */
+    const { student_id } = req.params;
+    const student = await Student.findByPk(student_id);
+    if (!student) {
+      return res.status(401).json({ error: 'Student not found' });
+    }
+
+    const checkins = await Checkin.findAll({ where: { student_id } });
+
+    return res.json(checkins);
   }
 }
 

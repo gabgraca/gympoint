@@ -1,8 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-// Model da tabela users
-
-class Student extends Model {
+class HelpOrder extends Model {
   /*
   no Sequelize todo model deve ter o método init recebendo obj sequelize
   chamar o método super.init passando a estrutura do model como primeiro
@@ -11,15 +9,10 @@ class Student extends Model {
   static init(sequelize) {
     super.init(
       {
-        id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true,
-        },
-        nome: Sequelize.STRING,
-        email: Sequelize.STRING,
-        idade: Sequelize.INTEGER,
-        peso: Sequelize.INTEGER,
-        altura: Sequelize.INTEGER,
+        student_id: Sequelize.INTEGER,
+        question: Sequelize.STRING,
+        answer: Sequelize.STRING,
+        answer_at: Sequelize.DATE,
       },
       {
         sequelize,
@@ -27,6 +20,10 @@ class Student extends Model {
     );
     return this;
   }
+
+  static associate(models) {
+    this.belongsTo(models.Student, { foreignKey: 'student_id' });
+  }
 }
 
-export default Student;
+export default HelpOrder;
