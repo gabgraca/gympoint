@@ -4,6 +4,9 @@ taskkill /F /IM node.exe
 Criar migration
 yarn sequelize migration:create --name=create-files
 
+Criar o postgres no docker
+docker run --name database -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres:11
+
 Criar mongodb no docker
 docker run --name mongobarber -p 27017:27017 -d -t mongo
 
