@@ -42,6 +42,7 @@ routes.use(authMiddleware);
 // Routes related to Gym Students
 routes.post('/students', StudentController.store);
 routes.put('/students', StudentController.update);
+routes.get('/students', StudentController.index);
 
 // Routes related to Gym Plans
 routes.post('/plans', PlanController.store);

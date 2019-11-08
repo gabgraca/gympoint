@@ -1,5 +1,6 @@
 // Inicia/Configura e Retorna o objeto express para o servidor
 import express from 'express';
+import cors from 'cors';
 import routes from './routes';
 import './database';
 
@@ -13,6 +14,7 @@ class App {
   middlewares() {
     // Configura o servidor para usar o JSON como padrão
     // das requisições
+    this.server.use(cors());
     this.server.use(express.json());
   }
 

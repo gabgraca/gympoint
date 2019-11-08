@@ -11,6 +11,15 @@ delete(){} //Remover aluno
 */
 
 class StudentController {
+  /**
+   * Listagem de alunos
+   */
+  async index(req, res) {
+    const students = await Student.findAll();
+
+    return res.json(students);
+  }
+
   /*
   Método: Criar aluno
    */
