@@ -20,6 +20,30 @@ class StudentController {
     return res.json(students);
   }
 
+  /**
+   * Retorna um único aluno
+   */
+  async show(req, res) {
+    const { studentId } = req.params;
+
+    const student = await Student.findByPk(studentId);
+
+    return res.json(student);
+  }
+
+  /**
+   * Deleta um aluno
+   */
+  async delete(req, res) {
+    const { studentId } = req.params;
+
+    const student = await Student.findByPk(studentId);
+
+    await student.destroy();
+
+    return res.json(student);
+  }
+
   /*
   Método: Criar aluno
    */

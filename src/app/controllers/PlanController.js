@@ -2,6 +2,14 @@ import * as Yup from 'yup';
 import Plan from '../models/Plan';
 
 class PlanController {
+  async show(req, res) {
+    const { id } = req.params;
+    const plan = await Plan.findByPk(id, {
+      attributes: ['title', 'duration', 'price'],
+    });
+    return res.json(plan);
+  }
+
   async store(req, res) {
     /**
      * Valida o eschema da requisição
@@ -39,7 +47,7 @@ class PlanController {
   async index(req, res) {
     const plans = await Plan.findAll({
       where: { canceled_at: null },
-      attributes: ['id', 'title', 'duration'],
+      attributes: ['id', 'title', 'duration', 'price'],
     });
 
     return res.json(plans);

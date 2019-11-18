@@ -43,11 +43,14 @@ routes.use(authMiddleware);
 routes.post('/students', StudentController.store);
 routes.put('/students', StudentController.update);
 routes.get('/students', StudentController.index);
+routes.get('/students/:studentId', StudentController.show);
+routes.delete('/students/:studentId', StudentController.delete);
 
 // Routes related to Gym Plans
 routes.post('/plans', PlanController.store);
 routes.put('/plans', PlanController.update);
 routes.get('/plans', PlanController.index);
+routes.get('/plans/:id', PlanController.show);
 routes.delete('/plans/:id', PlanController.delete);
 
 // Routes related to Gym Enrollments
