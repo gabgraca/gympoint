@@ -136,6 +136,10 @@ class EnrollmentController {
           model: Student,
           attributes: ['nome'],
         },
+        {
+          model: Plan,
+          attributes: ['title'],
+        },
       ],
     });
     return res.json(enrollments);
