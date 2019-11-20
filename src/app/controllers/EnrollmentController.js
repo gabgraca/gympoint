@@ -129,6 +129,23 @@ class EnrollmentController {
     return res.json(newEnrollment);
   }
 
+  async show(req, res) {
+    const { id } = req.params;
+    const enrollment = await Enrollment.findByPk(id, {
+      include: [
+        {
+          model: Student,
+          attributes: ['nome'],
+        },
+        {
+          model: Plan,
+          attributes: ['title'],
+        },
+      ],
+    });
+    return res.json(enrollment);
+  }
+
   async index(req, res) {
     const enrollments = await Enrollment.findAll({
       include: [
