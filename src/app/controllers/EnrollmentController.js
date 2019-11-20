@@ -1,6 +1,5 @@
 import * as Yup from 'yup';
 import { Op } from 'sequelize';
-import { addMonths, parseISO } from 'date-fns';
 import Enrollment from '../models/Enrollment';
 import Plan from '../models/Plan';
 import Student from '../models/Student';
@@ -131,7 +130,14 @@ class EnrollmentController {
   }
 
   async index(req, res) {
-    const enrollments = await Enrollment.findAll();
+    const enrollments = await Enrollment.findAll({
+      include: [
+        {
+          model: Student,
+          attributes: ['nome'],
+        },
+      ],
+    });
     return res.json(enrollments);
   }
 
