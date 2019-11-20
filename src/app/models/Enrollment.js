@@ -1,5 +1,5 @@
 import Sequelize, { Model } from 'sequelize';
-import { addMonths } from 'date-fns';
+import { addMonths, isBefore, isAfter } from 'date-fns';
 
 // Model da tabela users
 
@@ -19,6 +19,18 @@ class Enrollment extends Model {
         price: Sequelize.FLOAT,
         canceled_at: Sequelize.DATE,
         plan_duration: Sequelize.VIRTUAL,
+        active: {
+          type: Sequelize.VIRTUAL(Sequelize.BOOLEAN, [
+            'start_date',
+            'end_date',
+          ]),
+          get() {
+            return (
+              isBefore(this.get('start_date'), new Date()) &&
+              isAfter(this.get('end_date'), new Date())
+            );
+          },
+        },
       },
       {
         sequelize,
