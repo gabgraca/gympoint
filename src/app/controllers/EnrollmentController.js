@@ -148,6 +148,7 @@ class EnrollmentController {
 
   async index(req, res) {
     const enrollments = await Enrollment.findAll({
+      where: { canceled_at: null },
       include: [
         {
           model: Student,
