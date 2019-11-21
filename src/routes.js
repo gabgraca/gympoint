@@ -27,10 +27,6 @@ routes.get('/students/:student_id/checkins', CheckinController.index);
 // Routes related to help orders
 routes.post('/students/:student_id/help-orders', HelpOrderController.store);
 routes.get('/students/:student_id/help-orders', HelpOrderController.index);
-routes.post(
-  '/help-orders/:help_order_id/answer',
-  HelpOrderAnswerController.store
-);
 
 // Middleware para validar o token de todas as requisições abaixo
 routes.use(authMiddleware);
@@ -59,5 +55,11 @@ routes.put('/enrollments/:enrollment_id', EnrollmentController.update);
 routes.get('/enrollments', EnrollmentController.index);
 routes.get('/enrollments/:id', EnrollmentController.show);
 routes.delete('/enrollments/:enrollment_id', EnrollmentController.delete);
+
+routes.post(
+  '/help-orders/:help_order_id/answer',
+  HelpOrderAnswerController.store
+);
+routes.get('/help-orders', HelpOrderController.index);
 
 export default routes;

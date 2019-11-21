@@ -27,23 +27,33 @@ class HelpOrderController {
      * Check if the student exists
      */
     const { student_id } = req.params;
-    const student = await Student.findByPk(student_id);
-    if (!student) {
-      return res.status(401).json({ error: 'Student not found' });
-    }
+    if (student_id) {
+      const student = await Student.findByPk(student_id);
+      if (!student) {
+        return res.status(401).json({ error: 'Student not found' });
+      }
 
-    const helpOrders = await Help_Order.findAll({
-      where: {
-        student_id,
-      },
-      include: [
-        {
-          model: Student,
-          attributes: ['nome', 'email'],
+      const helpOrders = await Help_Order.findAll({
+        where: {
+          student_id,
         },
-      ],
+        include: [
+          {
+            model: Student,
+            attributes: ['nome', 'email'],
+          },
+        ],
+      });
+      return res.json(helpOrders);
+    }
+    const helpOrdersAll = await Help_Order.findAll({
+      where: { answer_at: null },
+      include: {
+        model: Student,
+        attributes: ['nome'],
+      },
     });
-    return res.json(helpOrders);
+    return res.json(helpOrdersAll);
   }
 }
 export default new HelpOrderController();
