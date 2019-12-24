@@ -9,6 +9,7 @@ import EnrollmentController from './app/controllers/EnrollmentController';
 import CheckinController from './app/controllers/CheckinController';
 import HelpOrderController from './app/controllers/HelpOrderController';
 import HelpOrderAnswerController from './app/controllers/HelpOrderAnswerController';
+import StudentSessionController from './app/controllers/StudentSessionController';
 import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
@@ -27,6 +28,7 @@ routes.get('/students/:student_id/checkins', CheckinController.index);
 // Routes related to help orders
 routes.post('/students/:student_id/help-orders', HelpOrderController.store);
 routes.get('/students/:student_id/help-orders', HelpOrderController.index);
+routes.get('/students/:email/appLogin', StudentSessionController.show);
 
 // Middleware para validar o token de todas as requisições abaixo
 routes.use(authMiddleware);
