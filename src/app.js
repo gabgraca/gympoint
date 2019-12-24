@@ -1,4 +1,5 @@
 // Inicia/Configura e Retorna o objeto express para o servidor
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import routes from './routes';
